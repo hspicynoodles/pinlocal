@@ -1,19 +1,8 @@
 // App.js
-import React, { useMemo, useState, useCallback } from "react";
-import {
-    SafeAreaView,
-    View,
-    Text,
-    StyleSheet,
-    FlatList,
-    Image,
-    TouchableOpacity,
-    RefreshControl,
-    Alert,
-    StatusBar,
-} from "react-native";
 
-// --- Mock data (replace with your API later) ---
+import React, { useMemo, useState, useCallback } from "react";
+import { SafeAreaView, View, Text, StyleSheet, FlatList, Image, TouchableOpacity, RefreshControl, Alert, StatusBar, } from "react-native";
+
 const SAMPLE = [
     { id: "1", title: "Hand-poured Candle", img: "https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800" },
     { id: "2", title: "Local Coffee Beans", img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800" },
@@ -69,28 +58,13 @@ export default function App() {
         }, 600);
     }, []);
 
-    const loadMore = useCallback(() => {
-        // simulate infinite scroll by duplicating with new ids
-        const more = SAMPLE.map((p, i) => ({
-            ...p,
-            id: `${p.id}-m-${Date.now()}-${i}`,
-            h: heights[Math.floor(Math.random() * heights.length)],
-        }));
-        setPins((prev) => [...prev, ...more]);
-    }, []);
 
-    const onCreatePin = () => {
-        Alert.alert("Create Pin", "Hook this up to your upload flow next 🔗");
-    };
 
     return (
         <SafeAreaView style={styles.safe}>
             <StatusBar barStyle="dark-content" />
             <View style={styles.header}>
                 <Text style={styles.brand}>PinLocal</Text>
-                <TouchableOpacity style={styles.addBtn} onPress={onCreatePin}>
-                    <Text style={styles.addTxt}>+ Pin</Text>
-                </TouchableOpacity>
             </View>
 
             <FlatList
@@ -113,18 +87,17 @@ export default function App() {
                 refreshControl={
                     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                 }
-                onEndReached={loadMore}
                 onEndReachedThreshold={0.4}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingHorizontal: 12, paddingBottom: 48 }}
             />
 
-            <TouchableOpacity style={styles.fab} onPress={onCreatePin}>
-                <Text style={styles.fabTxt}>＋</Text>
-            </TouchableOpacity>
         </SafeAreaView>
     );
 }
+
+
+
 
 function PinCard({ item }) {
     return (

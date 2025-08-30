@@ -1,11 +1,12 @@
 // screens/WelcomeScreen.js
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity } from 'react-native';
 
 export default function WelcomeScreen() {
 
     const navigation = useNavigation();
+
 
     return (
         <View style={styles.container}>
@@ -17,16 +18,24 @@ export default function WelcomeScreen() {
                     <Text style={{ fontWeight: 'bold' }}>Password</Text>
                     <TextInput style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 4, padding: 12 }}></TextInput>
                 </View>
-                <Button
-                    title="Log In"
-                    onPress={() => navigation.navigate('Home')}
-                />
-                <Button
-                    title="Sign Up"
-                    onPress={() => navigation.navigate('SignUp')}
-                />
+                <TouchableOpacity style={{
+                    backgroundColor: '#4a7bb0ff', padding: 12, borderRadius: 4, alignItems: 'center', height: 60
+                }}>
+                    <Button
+                        title="Log In"
+                        color="#fff"
+                        onPress={() => navigation.navigate('Profile')}
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ backgroundColor: '#4a7bb0ff', padding: 12, borderRadius: 4, alignItems: 'center', height: 60 }}>
+                    <Button
+                        title="Sign Up"
+                        color="#fff"
+                        onPress={() => navigation.navigate('SignUp')}
+                    />
+                </TouchableOpacity>
             </View>
-        </View>
+        </View >
     );
 }
 
